@@ -6,3 +6,15 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+/** @type {import('next').NextConfig} */
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://host.docker.internal:8000/api/:path*/'
+      },
+    ]
+  },
+};
