@@ -7,7 +7,15 @@
 	"postCreateCommand": "uv sync",
 	"customizations": {
 		"vscode": {
-			"extensions": ["ms-python.python"]
+			"extensions": ["ms-python.python"],
+			"settings": {
+				"pylint.args": [
+					"--load-plugins",
+					"pylint_django",
+					"--django-settings-module",
+					"config.settings.development"
+				]
+			}
 		}
 	}
 }
