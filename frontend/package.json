@@ -10,9 +10,15 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.7",
+    "@mui/x-data-grid": "^8.25.0",
+    "axios": "^1.13.2",
     "next": "16.1.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "swr": "^2.3.8"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
