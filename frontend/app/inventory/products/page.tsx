@@ -11,14 +11,33 @@ type ProductData = {
   description: string
 }
 
+type InputData = {
+  id: string
+  name: string
+  price: string
+  description: string
+}
+
 export default function Page() {
   // 読み込みデータを保持
   const [data, setData] = useState<ProductData[]>([])
-
   useEffect(() => {
     setData(productsData)
   }, [])
 
+  // 登録データを保持
+  const [input, setInput] = useState<InputData>({
+    id: '',
+    name: '',
+    price: '',
+    description: '',
+  })
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target
+    setInput({...input, [name]: value})
+  }
+
+  // 新規登録処理、新規登録行の表示状態を保持
   const [shownNewRow, setShownNewRow] = useState(false)
   const handleShowNewRow = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -39,6 +58,13 @@ export default function Page() {
   const handleEditRow: any = (id: number) => {
     setShownNewRow(false)
     setEditingRow(id)
+    const selectedProduct: ProductData = data.find((v) => v.id === id) as ProductData
+    setInput({
+      id: id.toString(),
+      name: selectedProduct.name,
+      price: selectedProduct.price.toString(),
+      description: selectedProduct.description,
+    })
   }
   const handleEditCancel: any = (id: number) => {
     setEditingRow(0)
@@ -72,13 +98,13 @@ export default function Page() {
             <tr>
               <td></td>
               <td>
-                <input type="text" />
+                <input type="text" name='name' onChange={handleInput}/>
               </td>
               <td>
-                <input type="number" />
+                <input type="number" name='price' onChange={handleInput}/>
               </td>
               <td>
-                <input type="text" />
+                <input type="text" name='description' onChange={handleInput}/>
               </td>
               <td></td>
               <td>
@@ -98,13 +124,13 @@ export default function Page() {
               <tr key={data.id}>
                 <td>{data.id}</td>
                 <td>
-                  <input type="text" defaultValue={data.name} />
+                  <input type="text" value={data.name} name='name' onChange={handleInput}/>
                 </td>
                 <td>
-                  <input type="number" defaultValue={data.price} />
+                  <input type="number" value={data.price} name='price' onChange={handleInput}/>
                 </td>
                 <td>
-                  <input type="text" defaultValue={data.description} />
+                  <input type="text" value={data.description} name='description' onChange={handleInput}/>
                 </td>
                 <td></td>
                 <td>
