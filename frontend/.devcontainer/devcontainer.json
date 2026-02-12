@@ -4,5 +4,30 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-  "remoteUser": "node"
+"remoteUser": "node",
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"biomejs.biome",
+			"streetsidesoftware.code-spell-checker",
+			"vmsynkov.colonize",
+			"EditorConfig.EditorConfig",
+			"tamasfe.even-better-toml",
+			"mhutchie.git-graph",
+			"github.vscode-github-actions",
+			"codezombiech.gitignore",
+			"eamodio.gitlens",
+			"wix.vscode-import-cost",
+			"oderwat.indent-rainbow",
+			"ms-vscode.makefile-tools",
+			"DavidAnson.vscode-markdownlint",
+			"NextNav.NextNav",
+			"Postman.postman-for-vscode",
+			"blazejkustra.react-compiler-marker",
+			"msjsdiag.vscode-react-native",
+			"redhat.vscode-yaml",
+			"mosapride.zenkaku"
+		]
+	}
+}
 }
