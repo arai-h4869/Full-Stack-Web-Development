@@ -124,13 +124,13 @@ export default function Page() {
               <tr key={data.id}>
                 <td>{data.id}</td>
                 <td>
-                  <input type="text" value={data.name} name='name' onChange={handleInput}/>
+                  <input type="text" value={input.name} name='name' onChange={handleInput}/>
                 </td>
                 <td>
-                  <input type="number" value={data.price} name='price' onChange={handleInput}/>
+                  <input type="number" value={input.price} name='price' onChange={handleInput}/>
                 </td>
                 <td>
-                  <input type="text" value={data.description} name='description' onChange={handleInput}/>
+                  <input type="text" value={input.description} name='description' onChange={handleInput}/>
                 </td>
                 <td></td>
                 <td>
