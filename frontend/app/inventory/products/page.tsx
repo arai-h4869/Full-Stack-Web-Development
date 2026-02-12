@@ -55,7 +55,7 @@ export default function Page() {
 
   // 更新・削除処理、更新・削除行の表示状態を保持
   const [editingRow, setEditingRow] = useState(0)
-  const handleEditRow: any = (id: number) => {
+  const handleEditRow = (id: number): void => {
     setShownNewRow(false)
     setEditingRow(id)
     const selectedProduct: ProductData = data.find((v) => v.id === id) as ProductData
@@ -66,14 +66,14 @@ export default function Page() {
       description: selectedProduct.description,
     })
   }
-  const handleEditCancel: any = (id: number) => {
+  const handleEditCancel = (id: number): void => {
     setEditingRow(0)
   }
-  const handleEdit: any = (id: number) => {
+  const handleEdit = (id: number): void => {
     setEditingRow(0)
   }
-  const handleDelete: any = (id: number) => {
-    setEditingRow
+  const handleDelete = (id: number): void => {
+    setEditingRow(0)
   }
 
   return (
