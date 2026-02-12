@@ -1,0 +1,14 @@
+version: 2
+
+updates:
+  # frontend (Next / npm)
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+
+  # backend (uv)
+  - package-ecosystem: "uv"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
