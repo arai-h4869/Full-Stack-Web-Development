@@ -34,7 +34,7 @@ export default function Page() {
   })
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
-    setInput({...input, [name]: value})
+    setInput({ ...input, [name]: value })
   }
 
   // 新規登録処理、新規登録行の表示状態を保持
@@ -58,7 +58,9 @@ export default function Page() {
   const handleEditRow = (id: number): void => {
     setShownNewRow(false)
     setEditingRow(id)
-    const selectedProduct: ProductData = data.find((v) => v.id === id) as ProductData
+    const selectedProduct: ProductData = data.find(
+      (v) => v.id === id,
+    ) as ProductData
     setInput({
       id: id.toString(),
       name: selectedProduct.name,
@@ -66,13 +68,13 @@ export default function Page() {
       description: selectedProduct.description,
     })
   }
-  const handleEditCancel = (id: number): void => {
+  const handleEditCancel = (_id: number): void => {
     setEditingRow(0)
   }
-  const handleEdit = (id: number): void => {
+  const handleEdit = (_id: number): void => {
     setEditingRow(0)
   }
-  const handleDelete = (id: number): void => {
+  const handleDelete = (_id: number): void => {
     setEditingRow(0)
   }
 
@@ -98,17 +100,20 @@ export default function Page() {
             <tr>
               <td></td>
               <td>
-                <input type="text" name='name' onChange={handleInput}/>
+                <input type="text" name="name" onChange={handleInput} />
               </td>
               <td>
-                <input type="number" name='price' onChange={handleInput}/>
+                <input type="number" name="price" onChange={handleInput} />
               </td>
               <td>
-                <input type="text" name='description' onChange={handleInput}/>
+                <input type="text" name="description" onChange={handleInput} />
               </td>
               <td></td>
               <td>
-                <button type="button" onClick={(event) => handleAddCancel(event)}>
+                <button
+                  type="button"
+                  onClick={(event) => handleAddCancel(event)}
+                >
                   キャンセル
                 </button>
                 <button type="button" onClick={(event) => handleAdd(event)}>
@@ -124,17 +129,35 @@ export default function Page() {
               <tr key={data.id}>
                 <td>{data.id}</td>
                 <td>
-                  <input type="text" value={input.name} name='name' onChange={handleInput}/>
+                  <input
+                    type="text"
+                    value={input.name}
+                    name="name"
+                    onChange={handleInput}
+                  />
                 </td>
                 <td>
-                  <input type="number" value={input.price} name='price' onChange={handleInput}/>
+                  <input
+                    type="number"
+                    value={input.price}
+                    name="price"
+                    onChange={handleInput}
+                  />
                 </td>
                 <td>
-                  <input type="text" value={input.description} name='description' onChange={handleInput}/>
+                  <input
+                    type="text"
+                    value={input.description}
+                    name="description"
+                    onChange={handleInput}
+                  />
                 </td>
                 <td></td>
                 <td>
-                  <button type="button" onClick={() => handleEditCancel(data.id)}>
+                  <button
+                    type="button"
+                    onClick={() => handleEditCancel(data.id)}
+                  >
                     キャンセル
                   </button>
                   <button type="button" onClick={() => handleEdit(data.id)}>
