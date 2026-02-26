@@ -21,9 +21,7 @@ type InventoryData = {
   inventory: number
 }
 
-export default function Page() {
-  const params = { id: 1 }
-
+export default function Page({ params }: { params: { id: number } }) {
   const [product, setProduct] = useState<ProductData>({
     id: 0,
     name: '',
