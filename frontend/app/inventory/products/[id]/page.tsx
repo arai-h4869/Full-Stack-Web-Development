@@ -1,6 +1,7 @@
 'use client'
 
-import { use, useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import inventoriesData from '../sample/dummy_inventories.json'
 import productData from '../sample/dummy_products.json'
 
@@ -21,8 +22,9 @@ type InventoryData = {
   inventory: number
 }
 
-export default function Page({ params }: { params: Promise<{ id: number }> }) {
-  const { id } = use(params)
+export default function Page() {
+  const params = useParams()
+  const id = Number(params.id)
 
   const [product, setProduct] = useState<ProductData>({
     id: 0,
@@ -34,7 +36,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
 
   useEffect(() => {
     const selectedProduct: ProductData = productData.find(
-      (v) => v.id === Number(id),
+      (v) => v.id === id,
     ) ?? {
       id: 0,
       name: '',
