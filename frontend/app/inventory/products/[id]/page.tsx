@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import inventoriesData from '../sample/dummy_inventories.json'
 import productData from '../sample/dummy_products.json'
 
@@ -21,7 +21,9 @@ type InventoryData = {
   inventory: number
 }
 
-export default function Page({ params }: { params: { id: number } }) {
+export default function Page({ params }: { params: Promise<{ id: number }> }) {
+  const { id } = use(params)
+
   const [product, setProduct] = useState<ProductData>({
     id: 0,
     name: '',
@@ -32,7 +34,7 @@ export default function Page({ params }: { params: { id: number } }) {
 
   useEffect(() => {
     const selectedProduct: ProductData = productData.find(
-      (v) => v.id === params.id,
+      (v) => v.id === Number(id),
     ) ?? {
       id: 0,
       name: '',
@@ -41,7 +43,7 @@ export default function Page({ params }: { params: { id: number } }) {
     }
     setProduct(selectedProduct)
     setData(inventoriesData)
-  }, [])
+  }, [id])
 
   return (
     <>
