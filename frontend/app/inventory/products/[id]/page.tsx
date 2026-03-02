@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import inventoriesData from '../sample/dummy_inventories.json'
 import productData from '../sample/dummy_products.json'
 
@@ -10,6 +11,11 @@ type ProductData = {
   name: string
   price: number
   description: string
+}
+
+type FormData = {
+  id: number
+  quantity: number
 }
 
 type InventoryData = {
@@ -23,9 +29,16 @@ type InventoryData = {
 }
 
 export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InventoryData>()
+
   const params = useParams()
   const id = Number(params.id)
 
+  // 読み込みデータを保持
   const [product, setProduct] = useState<ProductData>({
     id: 0,
     name: '',
@@ -33,6 +46,7 @@ export default function Page() {
     description: '',
   })
   const [data, setData] = useState<InventoryData[]>([])
+  const [action, setAction] = useState('')
 
   useEffect(() => {
     const selectedProduct: ProductData = productData.find(
@@ -47,21 +61,60 @@ export default function Page() {
     setData(inventoriesData)
   }, [id])
 
+  const onSubmit = (event: InventoryData): void => {
+    const data: FormData = {
+      id: event.id,
+      quantity: event.quantity,
+    }
+    if (action === 'purchase') {
+      handlePurchase(data)
+    } else if (action === 'sell') {
+      if (data.id === null) {
+        return
+      }
+      handleSell(data)
+    }
+  }
+
+  // 仕入れ・卸し処理
+  const handlePurchase = (data: FormData) => {}
+  const handleSell = (data: FormData) => {}
+
+
   return (
     <>
       <h2>商品在庫管理</h2>
       <h3>在庫管理</h3>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>商品名:</label>
           <span>{product.name}</span>
         </div>
         <div>
           <label>数量:</label>
-          <input type="text" />
+          <input
+            type="number"
+            id="quantity"
+            {...register('quantity', {
+              required: '数量を入力してください',
+              min: {
+                value: 1,
+                message: '1から99999999の数値を入力してください',
+              },
+              max: {
+                value: 99999999,
+                message: '1から99,999,999の数値を入力してください',
+              },
+            })}
+          />
+          {errors.quantity?.message && <div>{errors.quantity.message}</div>}
         </div>
-        <button>商品を仕入れる</button>
-        <button>商品を卸す</button>
+        <button type="button" onClick={() => setAction('purchase')}>
+          商品を仕入れる
+        </button>
+        <button type="button" onClick={() => setAction('sell')}>
+          商品を卸す
+        </button>
       </form>
       <h3>在庫履歴</h3>
       <table>
