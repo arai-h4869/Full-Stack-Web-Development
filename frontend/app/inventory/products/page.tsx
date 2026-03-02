@@ -132,11 +132,11 @@ export default function Page() {
                       required: '必須項目です',
                       min: {
                         value: 1,
-                        message: '単価は1以上の数値を入力してください',
+                        message: '1から99999999の数値を入力してください',
                       },
                       max: {
                         value: 99999999,
-                        message: '単価は99,999,999以下の数値を入力してください',
+                        message: '1から99,999,999の数値を入力してください',
                       },
                     })}
                   />
@@ -171,24 +171,34 @@ export default function Page() {
                     <input
                       type="text"
                       id="name"
-                      {...register('name', { required: true, maxLength: 100 })}
+                      {...register('name', {
+                        required: '必須項目です',
+                        maxLength: {
+                          value: 100,
+                          message: '商品名は100文字以内で入力してください',
+                        },
+                      })}
                     />
-                    {errors.name && (
-                      <div>100文字以内の商品名を入力してください</div>
-                    )}
+                    {errors.name && <div>{errors.name.message}</div>}
                   </td>
                   <td>
                     <input
                       type="number"
                       id="price"
                       {...register('price', {
-                        required: true,
-                        min: 1,
-                        max: 99999999,
+                        required: '必須項目です',
+                        min: {
+                          value: 1,
+                          message: '1から99999999の数値を入力してください',
+                        },
+                        max: {
+                          value: 99999999,
+                          message: '1から99,999,999の数値を入力してください',
+                        },
                       })}
                     />
                     {errors.price && (
-                      <div>1から99999999以下の数値を入力してください</div>
+                      <div>{errors.price.message}</div>
                     )}
                   </td>
                   <td>
