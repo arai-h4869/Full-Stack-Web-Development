@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "migrate": "biome migrate --write",
+    "ci": "biome ci"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
