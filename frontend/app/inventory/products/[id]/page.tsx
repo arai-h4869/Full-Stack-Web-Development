@@ -107,10 +107,10 @@ export default function Page() {
   }
 
   // 仕入れ・卸し処理
-  const handlePurchase = (data: FormData) => {
+  const handlePurchase = (_data: FormData) => {
     result('success', '商品を仕入れました')
   }
-  const handleSell = (data: FormData) => {
+  const handleSell = (_data: FormData) => {
     result('success', '商品を卸しました')
   }
 

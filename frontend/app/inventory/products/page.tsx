@@ -102,7 +102,7 @@ export default function Page() {
   const handleAddCancel = () => {
     setId(0)
   }
-  const handleAdd = (data: ProductData) => {
+  const handleAdd = (_data: ProductData) => {
     result('success', '商品が登録されました')
     setId(0)
   }
@@ -120,11 +120,11 @@ export default function Page() {
   const handleEditCancel = () => {
     setId(0)
   }
-  const handleEdit = (data: ProductData) => {
+  const handleEdit = (_data: ProductData) => {
     result('success', '商品が更新されました')
     setId(0)
   }
-  const handleDelete = (id: number) => {
+  const handleDelete = (_id: number) => {
     result('success', '商品が削除されました')
     setId(0)
   }
