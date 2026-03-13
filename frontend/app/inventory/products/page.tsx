@@ -134,16 +134,16 @@ export default function Page() {
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity={severity}>{message}</Alert>
       </Snackbar>
-      <Typography variant='h5'>商品一覧</Typography>
+      <Typography variant="h5">商品一覧</Typography>
       <Button
-        variant='contained'
+        variant="contained"
         startIcon={<AddIcon />}
         onClick={handleShowNewRow}
       >
         商品を追加する
       </Button>
       <Box
-        component='form'
+        component="form"
         onSubmit={handleSubmit(onSubmit)}
         sx={{ height: 400, width: '100%' }}
       >
@@ -165,8 +165,8 @@ export default function Page() {
                   <TableCell></TableCell>
                   <TableCell>
                     <TextField
-                      type='text'
-                      id='name'
+                      type="text"
+                      id="name"
                       {...register('name', {
                         required: '必須入力です',
                         maxLength: {
@@ -180,8 +180,8 @@ export default function Page() {
                   </TableCell>
                   <TableCell>
                     <TextField
-                      type='number'
-                      id='price'
+                      type="number"
+                      id="price"
                       {...register('price', {
                         required: '必須入力です',
                         min: {
@@ -199,8 +199,8 @@ export default function Page() {
                   </TableCell>
                   <TableCell>
                     <TextField
-                      type='text'
-                      id='description'
+                      type="text"
+                      id="description"
                       {...register('description')}
                     />
                   </TableCell>
@@ -208,15 +208,15 @@ export default function Page() {
                   <TableCell></TableCell>
                   <TableCell>
                     <Button
-                      variant='outlined'
+                      variant="outlined"
                       startIcon={<CancelIcon />}
                       onClick={() => handleAddCancel()}
                     >
                       キャンセル
                     </Button>
                     <Button
-                      type='submit'
-                      variant='contained'
+                      type="submit"
+                      variant="contained"
                       startIcon={<CheckIcon />}
                       onClick={() => setAction('add')}
                     >
@@ -233,8 +233,8 @@ export default function Page() {
                     <TableCell>{data.id}</TableCell>
                     <TableCell>
                       <input
-                        type='text'
-                        id='name'
+                        type="text"
+                        id="name"
                         {...register('name', {
                           required: '必須項目です',
                           maxLength: {
@@ -247,8 +247,8 @@ export default function Page() {
                     </TableCell>
                     <TableCell>
                       <input
-                        type='number'
-                        id='price'
+                        type="number"
+                        id="price"
                         {...register('price', {
                           required: '必須項目です',
                           min: {
@@ -265,32 +265,32 @@ export default function Page() {
                     </TableCell>
                     <TableCell>
                       <input
-                        type='text'
-                        id='description'
+                        type="text"
+                        id="description"
                         {...register('description')}
                       />
                     </TableCell>
                     <TableCell></TableCell>
                     <TableCell>
                       <Button
-                        variant='outlined'
+                        variant="outlined"
                         startIcon={<CancelIcon />}
                         onClick={() => handleEditCancel()}
                       >
                         キャンセル
                       </Button>
                       <Button
-                        type='submit'
-                        variant='contained'
+                        type="submit"
+                        variant="contained"
                         startIcon={<CheckIcon />}
                         onClick={() => setAction('update')}
                       >
                         更新する
                       </Button>
                       <IconButton
-                        aria-label='削除する'
-                        type='submit'
-                        color='warning'
+                        aria-label="削除する"
+                        type="submit"
+                        color="warning"
                         onClick={() => setAction('delete')}
                       >
                         <DeleteIcon />
@@ -310,8 +310,8 @@ export default function Page() {
                     </TableCell>
                     <TableCell>
                       <IconButton
-                        aria-label='編集する'
-                        color='primary'
+                        aria-label="編集する"
+                        color="primary"
                         onClick={() => handleEditRow(data.id)}
                       >
                         <EditIcon />
