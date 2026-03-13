@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.8",
+    "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.8",
-    "@mui/x-data-grid": "^8.27.3",
+    "@mui/x-data-grid": "^8.27.5",
     "axios": "^1.13.6",
     "next": "^16.1.6",
     "react": "^19.2.4",
@@ -23,7 +23,7 @@
     "swr": "^2.4.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.5",
+    "@biomejs/biome": "^2.4.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^25",
     "@types/react": "^19",
