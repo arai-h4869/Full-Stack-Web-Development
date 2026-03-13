@@ -1,3 +1,4 @@
+# https://biomejs.dev/ja/recipes/continuous-integration/
 name: Code quality
 
 on:
