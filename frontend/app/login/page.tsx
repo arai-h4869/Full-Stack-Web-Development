@@ -1,8 +1,101 @@
+'use client'
+
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  createTheme,
+  TextField,
+  ThemeProvider,
+  Typography,
+} from '@mui/material'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+
+type FormData = {
+  username: string
+  password: string
+}
+
 export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+  const router = useRouter()
+
+  const defaultTheme = createTheme()
+
+  const onSubmit = (event: FormData): void => {
+    const data: FormData = {
+      username: event.username,
+      password: event.password,
+    }
+
+    handleLogin(data)
+  }
+
+  const handleLogin = (_data: FormData) => {
+    router.push('/inventory/products')
+  }
+
   return (
-    <>
-      <h2>ログイン</h2>
-      <p>ログインの入力項目を表示する</p>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            ログイン
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              type="text"
+              id="username"
+              variant="filled"
+              label="ユーザー名(必須)"
+              fullWidth
+              margin="normal"
+              {...register('username', { required: '必須入力です' })}
+              error={Boolean(errors.username)}
+              helperText={errors.username?.message?.toString() || ' '}
+            />
+            <TextField
+              type="password"
+              id="password"
+              variant="filled"
+              label="パスワード(必須)"
+              fullWidth
+              margin="normal"
+              {...register('password', {
+                required: '必須入力です',
+                minLength: {
+                  value: 8,
+                  message: '8文字以上の文字列にしてください',
+                },
+              })}
+              error={Boolean(errors.password)}
+              helperText={errors.password?.message?.toString() || ' '}
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              sx={{ mt: 3, mb: 2 }}
+            >
+              ログイン
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   )
 }
