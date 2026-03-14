@@ -8,6 +8,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='商品名')
     price = models.IntegerField(verbose_name='価格')
     description = models.TextField(verbose_name='商品説明', null=True, blank=True)
+    objects: models.Manager["Product"]
 
     class Meta:
         db_table = 'product'

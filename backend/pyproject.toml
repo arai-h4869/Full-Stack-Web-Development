@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django-stubs>=5.2.9",
+    "django-stubs-ext>=5.2.9",
     "djangorestframework>=3.16.1",
     "mypy>=1.19.1",
     "mysqlclient>=2.2.7",
