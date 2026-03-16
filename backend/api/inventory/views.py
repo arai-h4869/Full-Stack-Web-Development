@@ -20,6 +20,17 @@ class ProductView(APIView):
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def post(self, request, formant=None):
+        """
+        商品を登録する
+        """
+        serializer = ProductSerializer(data=request.data)
+        # validationを通らなかった場合、例外を投げる
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
 
 class ProductModelView(ModelViewSet):
     """
