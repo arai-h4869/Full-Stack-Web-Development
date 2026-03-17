@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/python:2-3.13-trixie
+FROM mcr.microsoft.com/devcontainers/python:2-3.14-trixie
 
 RUN rm -f /etc/apt/sources.list.d/yarn.list \
   && apt-get update \

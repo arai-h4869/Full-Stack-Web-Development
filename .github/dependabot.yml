@@ -12,3 +12,15 @@ updates:
     directory: "/backend"
     schedule:
       interval: "daily"
+
+  # frontend container
+  - package-ecosystem: "docker"
+    directory: "/frontend/.devcontainer"
+    schedule:
+      interval: "daily"
+
+  # backend container
+  - package-ecosystem: "docker"
+    directory: "/backend/.devcontainer"
+    schedule:
+      interval: "daily"
