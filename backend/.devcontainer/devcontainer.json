@@ -1,5 +1,5 @@
 {
-	"name": "Python 3",
+	"name": "Full-Stack-Web-Development Backend",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
