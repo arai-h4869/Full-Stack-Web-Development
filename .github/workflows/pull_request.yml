@@ -39,7 +39,7 @@ jobs:
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
-          version: 2.4.9
+          version: latest
 
       - name: Get Biome version
         id: biome_version
