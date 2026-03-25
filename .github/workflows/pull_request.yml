@@ -54,7 +54,7 @@ jobs:
           echo "version=$SCHEMA" >> $GITHUB_OUTPUT
 
       - name: Run Biome migrate if needed
-        if: always()
+        if: steps.biome_version.outputs.version != steps.schema_version.outputs.version
         run: biome migrate --write
         working-directory: frontend
 
@@ -65,8 +65,7 @@ jobs:
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
             git add frontend/biome.json
-            git commit -m "chore: biome migrate"
-
+            git commit -m "chore: biome migrate [skip ci]"
             BRANCH="${{ github.head_ref || github.ref_name }}"
 
             git fetch origin $BRANCH
