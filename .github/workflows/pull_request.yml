@@ -59,7 +59,9 @@ jobs:
         working-directory: frontend
 
       - name: Commit biome changes
-        if: false
+        if: |
+          steps.biome_version.outputs.version != steps.schema_version.outputs.version &&
+          github.event.pull_request.head.repo.full_name == github.repository
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config user.name "github-actions"
