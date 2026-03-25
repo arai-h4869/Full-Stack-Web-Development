@@ -53,12 +53,12 @@ jobs:
           echo "version=$SCHEMA" >> $GITHUB_OUTPUT
 
       - name: Run Biome migrate if needed
-        if: steps.biome_version.outputs.version != steps.schema_version.outputs.version
+        if: always()
         run: biome migrate
         working-directory: frontend
 
       - name: Commit biome changes
-        if: steps.biome_version.outputs.version != steps.schema_version.outputs.version
+        if: false
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config user.name "github-actions"
