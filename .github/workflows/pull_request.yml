@@ -59,16 +59,14 @@ jobs:
         working-directory: frontend
 
       - name: Commit biome changes
-        if: |
-          steps.biome_version.outputs.version != steps.schema_version.outputs.version &&
-          github.event.pull_request.head.repo.full_name == github.repository
+        if: steps.biome_version.outputs.version != steps.schema_version.outputs.version
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
             git add frontend/biome.json
             git commit -m "chore: biome migrate"
-            git push
+            git push origin HEAD:${{ github.head_ref }}
           fi
 
       - name: Run Biome
