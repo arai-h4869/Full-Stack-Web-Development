@@ -55,7 +55,7 @@ jobs:
 
       - name: Run Biome migrate if needed
         if: always()
-        run: biome migrate
+        run: biome migrate --write
         working-directory: frontend
 
       - name: Commit biome changes
