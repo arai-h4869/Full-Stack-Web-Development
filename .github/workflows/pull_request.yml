@@ -16,25 +16,46 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          persist-credentials: false
+          persist-credentials: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: "npm"
           cache-dependency-path: frontend/package-lock.json
+
       - name: Install dependencies
         run: npm ci
         working-directory: frontend
+
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
           version: latest
+
+      - name: Run Biome migrate
+        if: github.actor == 'dependabot[bot]'
+        run: biome migrate
+        working-directory: frontend
+
+      - name: Commit biome changes
+        if: github.actor == 'dependabot[bot]'
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add .
+            git commit -m "chore: biome migrate"
+            git push
+          fi
+
       - name: Run Biome
         run: biome ci .
         working-directory: frontend
