@@ -1,5 +1,5 @@
 # https://biomejs.dev/ja/recipes/continuous-integration/
-name: Code quality
+name: Biome Check
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
   pull_request:
     paths:
       - "frontend/**"
+      - ".github/workflows/**"
 
 jobs:
   quality:
@@ -40,20 +41,42 @@ jobs:
         with:
           version: latest
 
-      - name: Run Biome migrate
-        if: github.actor == 'dependabot[bot]'
-        run: biome migrate
+      - name: Get Biome version
+        id: biome_version
+        run: |
+          VERSION=$(biome --version | awk '{print $NF}')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get schema version
+        id: schema_version
+        run: |
+          SCHEMA=$(jq -r '."$schema"' frontend/biome.json | sed 's#.*/##; s#/schema.json##')
+          echo "version=$SCHEMA" >> $GITHUB_OUTPUT
+
+      - name: Run Biome migrate if needed
+        if: |
+          github.actor == 'dependabot[bot]' &&
+          steps.biome_version.outputs.version != steps.schema_version.outputs.version
+        run: biome migrate --write
         working-directory: frontend
 
       - name: Commit biome changes
-        if: github.actor == 'dependabot[bot]'
+        if: |
+          github.actor == 'dependabot[bot]' &&
+          steps.biome_version.outputs.version != steps.schema_version.outputs.version
         run: |
           if [[ -n $(git status --porcelain) ]]; then
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
-            git add .
-            git commit -m "chore: biome migrate"
-            git push
+            git add frontend/biome.json
+            git commit -m "chore: biome migrate [skip ci]"
+
+            BRANCH="${{ github.head_ref }}"
+
+            git fetch origin $BRANCH
+            git rebase origin/$BRANCH
+
+            git push --force-with-lease origin HEAD:$BRANCH
           fi
 
       - name: Run Biome
